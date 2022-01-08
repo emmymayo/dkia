@@ -16,6 +16,6 @@ class ExamSeeder extends Seeder
     public function run()
     {
         DB::table('exams')->delete();
-        Exam::factory()->count(3)->create();
+        Exam::factory()->count(1)->create();
     }
 }

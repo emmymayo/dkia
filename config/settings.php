@@ -9,7 +9,7 @@ return [
     'schools' => [
         'sms' => [
             'name' => 'SMS Academy', 
-            'db' =>'sms',
+            'db' =>'dkia',
         ],
         // 'other' => [
         //     'name' => "Other Int'l Academy",
@@ -78,7 +78,7 @@ return [
     //TEST
     //set number of students to be created in Database Seeder
     'seed' => [
-        'students' => 500
+        'students' => 1
     ]
 
 ];

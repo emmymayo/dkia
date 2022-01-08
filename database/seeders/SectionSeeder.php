@@ -16,6 +16,6 @@ class SectionSeeder extends Seeder
     public function run()
     {
         DB::table('sections')->delete();
-        Section::factory()->count(10)->create();
+        Section::factory()->count(3)->create();
     }
 }

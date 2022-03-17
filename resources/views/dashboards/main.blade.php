@@ -43,7 +43,9 @@
                             <span id="dashTime" class="font-weight-light h3 "></span>	<br>
 			                <span id="dashDate" class="font-weight-light h3 "></span> <br>
                             @can('student-only')
+                            @if(!empty($my_section))
                             <span class="my-2 font-weight-bold h3 ">{{$my_section->classes->name.' '. $my_section->name}}</span>
+                            @endif
                             @endcan
                         </div>
                     </div>

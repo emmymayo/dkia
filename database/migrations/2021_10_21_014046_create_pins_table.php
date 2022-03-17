@@ -18,6 +18,7 @@ class CreatePinsTable extends Migration
             
             $table->string('token');
             $table->foreignId('exam_id')->constrained();
+            $table->bigInteger('student_id')->nullable();
             $table->string('serial_no')->nullable();
             $table->integer('units_left')->default(100);
             $table->timestamps();

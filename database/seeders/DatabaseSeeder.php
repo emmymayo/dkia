@@ -20,14 +20,14 @@ class DatabaseSeeder extends Seeder
             StateSeeder::class,
             LgaSeeder::class,
             ClassTypeSeeder::class,
-            ClassesSeeder::class,
-            SectionSeeder::class,
-            ExamSeeder::class,
+            // ClassesSeeder::class,
+            // SectionSeeder::class,
+            // ExamSeeder::class,
             SettingSeeder::class,
             SuperSeeder::class,
             AdminSeeder::class,
-            TeacherSeeder::class,
-            StudentSeeder::class
+            // TeacherSeeder::class,
+            // StudentSeeder::class
         ]);
     }
 }

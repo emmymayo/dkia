@@ -86,7 +86,7 @@ class UserController extends Controller
     {
         if(User::find(Auth::id())->isAdmin() || $user->id = Auth::id() ){
             $request->validate([
-                'photo' => 'bail|required|file|image|max:1024|mimes:jpg,png'
+                'photo' => 'bail|required|file|image|max:200|mimes:jpg,png'
             ]);
             if($request->file('photo')){
                 $userId = $user->id;

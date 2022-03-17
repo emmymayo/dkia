@@ -59,7 +59,7 @@ class SectionStudents extends Component
 
     public function toggleStudentStatus(User $user){
         $this->authorize('update',Student::class);
-        $user->status = $user->status===0?1:0;
+        $user->status = $user->status==0?1:0;
         $user->save();
         session()->flash('toggle-status-success','Status Changed Successfully');
         $this->loadStudents();

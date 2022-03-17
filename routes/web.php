@@ -62,7 +62,7 @@ use Illuminate\Support\Facades\Gate;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('login');
 })->name('home');
 
 //Authentication Routes
@@ -81,7 +81,7 @@ Route::get('/configs', function(){
 })->middleware('auth');
 
 Route::post('/login',[LoginController::class,'login']);
-Route::any('/logout',[LoginController::class, 'logout'])->middleware('auth');
+Route::any('/logout',[LoginController::class, 'logout'])->name('logout')->middleware('auth');
 Route::get('/dashboard',[UserDashboardController::class,'toUserDashboard'])->middleware('auth')->name('dashboard');
 
 

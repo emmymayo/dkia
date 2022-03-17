@@ -93,12 +93,12 @@
                                                 <td>@{{cbt.name}}</td>
                                                 <td>@{{cbt.duration}}</td>
                                                 <td>@{{cbt.subject.name}}</td>
-                                                <td>@{{getCbtType(cbt.type)}}</td>
-                                                <td class="" :class="{ 'text-success': cbt.published}">@{{cbt.published?'Published':'Pending'}}</td>
+                                                <td>@{{getCbtType(parseInt(cbt.type))}}</td>
+                                                <td class="" :class="{ 'text-success': cbt.published==true}">@{{cbt.published==true?'Published':'Pending'}}</td>
                                                 <td class="dropdown small">
                                                     <a class="btn" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <button @click="togglePublished(cbt.id,cbt.published)" class="dropdown-item"><i class="fa fa-toggle-on"></i> Toggle Publish</button>
+                                                        <button @click="togglePublished(cbt.id,parseInt(cbt.published))" class="dropdown-item"><i class="fa fa-toggle-on"></i> Toggle Publish</button>
                                                         <button @click="viewCbt(cbt.id)" class="dropdown-item"><i class="fa fa-eye"></i> View</button>
                                                         <button @click="assignSections(cbt.id)" class="dropdown-item"><i class="fas fa-school"></i> Assign Sections</button>
                                                         <button @click="editCbt(cbt.id)" class="dropdown-item"><i class="fa fa-edit"></i> Edit</button>

@@ -61,7 +61,7 @@ class CbtController extends Controller
             'type'=> 'nullable|integer',
             'published' => 'nullable|boolean',
         ]);
-        $data = array_filter($data, fn ($value) => $value!=null ); //Remove null elements
+        $data = array_filter($data, fn ($value) => $value!==null ); //Remove null elements
        
         $cbt = Cbt::find($id);
         $cbt->update($data);

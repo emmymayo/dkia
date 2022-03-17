@@ -42,7 +42,7 @@ const RollCall = {
                 return response = await axios.post(url,params);
                 
               } catch (error) {
-                console.error(error);
+                console.dir(error);
                 toastr.error('Something went wrong.');
               }
         },
@@ -216,7 +216,7 @@ const RollView = {
                 return response = await axios.get(url+query);
                 
               } catch (error) {
-                console.error(error);
+                console.dir(error);
                 toastr.error('Something went wrong.');
               }
         },

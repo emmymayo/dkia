@@ -20,12 +20,7 @@ class SetWorkingDB
     public function handle(Request $request, Closure $next)
     {
         
-        if(session('working_db')){
-            
-            Config::set('database.connections.mysql.database',session('working_db'));
-            DB::purge('mysql');
-         
-        }
+       
         return $next($request);
     }
 }

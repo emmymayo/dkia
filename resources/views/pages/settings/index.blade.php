@@ -43,7 +43,7 @@
                 <form action="/settings/school/logo" method="POST" enctype="multipart/form-data" >
                 @csrf
                 <div class="form-group mx-md-5 px-md-5">
-                    <label for="avatar">Upload School Logo (1MB max, JPEG or PNG.)</label>
+                    <label for="avatar">Upload School Logo (200KB max, JPEG or PNG.)</label>
                     <div class="input-group">
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" accept="image/*"

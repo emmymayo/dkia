@@ -297,7 +297,7 @@
                                 <form action="/users/{{$profile->user->id}}/upload-photo" method="POST" enctype="multipart/form-data" >
                                 @csrf
                                 <div class="form-group">
-                                    <label for="avatar">Profile Picture (1MB max, JPEG or PNG.)</label>
+                                    <label for="avatar">Profile Picture (200KB max, JPEG or PNG.)</label>
                                     <div class="input-group">
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" accept="image/*"

@@ -29,7 +29,7 @@ class SettingSeeder extends Seeder
                         [10, 'times.school.opened', '0', 'No. Times School Opened',],
                         [11, 'use.attendance.system', '1', 'Use Attendance System',],
                         [12, 'school.logo', 'images/school-logo.png', 'School Logo',],
-                        [13, 'short.notice', 'Continuous assessment begins 3rd October', 'Short Notice', ]
+                        [13, 'short.notice', '', 'Short Notice', ]
                     ];
         foreach($settings as $setting){
             Setting::create([

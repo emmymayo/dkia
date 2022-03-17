@@ -16,7 +16,7 @@ class CreateEClassesTable extends Migration
         Schema::create('e_classes', function (Blueprint $table) {
             $table->id();
             $table->string('zoom_uuid');
-            $table->unsignedBigInteger('zoom_meeting_id');
+            $table->string('zoom_meeting_id');
             $table->string('topic');
             $table->smallInteger('type')->nullable();
             $table->foreignId('section_id')->constrained();

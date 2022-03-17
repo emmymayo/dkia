@@ -9,7 +9,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header ">
-            <a href="/" class="lead"><i class="fas fa-home left"> </i></a>
+            <a href="http://destinykiddiesinternational.com" class="lead"><i class="fas fa-home left"> </i></a>
             </div>
             <div class="card-body">
             <p class="login-box-msg text-dark">Sign in to start your session</p>

@@ -70,14 +70,30 @@ class Mark extends Model
     }
 
     public function subjectPosition(){
-        $rank = DB::select('SELECT student_id, 
-                 RANK() OVER(ORDER BY (cass1+cass2+cass3+cass4+tass) DESC) position
-                 from marks 
-                 where exam_id = ? and subject_id = ? GROUP BY student_id',[$this->exam_id,$this->subject_id]);
+        // MYSQL 8
+        // $rank = DB::select('SELECT student_id, 
+        //          RANK() OVER(ORDER BY (cass1+cass2+cass3+cass4+tass) DESC) position
+        //          from marks 
+        //          where exam_id = ? and subject_id = ? and section_id = ? GROUP BY student_id', 
+                    // [$this->exam_id,$this->subject_id, $this->section_id]);
                 //->where('exam_id',$this->exam_id)
                 //->where('subject_id',$this->subject_id)
                 //->where('student_id',$this->student_id)
                // ->get();
+
+            //RANKING FOR MYSQL OLD, ABOVE SHOULD BE USED FOR LATEST MYSQL VERSION
+            $rank = DB::select('SELECT *, (
+                        SELECT 1+ COUNT( (s2.cass1+s2.cass2+s2.cass3+s2.cass4+s2.tass)) 
+                        FROM marks s2 
+                        WHERE s2.section_id = s.section_id AND s2.exam_id = s.exam_id AND s2.subject_id = s.subject_id
+                         AND (s2.cass1+s2.cass2+s2.cass3+s2.cass4+s2.tass) > (s.cass1+s.cass2+s.cass3+s.cass4+s.tass)
+                        ) AS position
+                 from marks s
+                 where exam_id = ? AND subject_id = ? AND section_id = ? 
+                 ORDER BY (cass1+cass2+cass3+cass4+tass), student_id DESC'
+                 ,
+                 [$this->exam_id, $this->subject_id, $this->section->id]);   
+              //dd($rank) ;
        $rank = collect($rank)->where('student_id',$this->student_id)->first();
         $position = ExamHelper::getFormattedPosition($rank->position);
 

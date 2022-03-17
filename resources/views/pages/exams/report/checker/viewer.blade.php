@@ -16,7 +16,7 @@
 			        transform:rotate(-90deg);  	
                 }
     </style>
-    <title>Document</title>
+    <title>{{$record->student->user->name}}</title>
 </head>
 <body>
 
@@ -43,7 +43,7 @@
                     <div class="col-sm-5 row ">
                         <div class="col-sm-12 mb-3 text-uppercase" id="student-name">Name: {{$record->student->user->name}}</div>
                         <div class="col-sm-12 mb-3 text-uppercase" id="student-class">Class: {{$record->section->classes->name.' '}} 
-                                                                                            {{$record->section->name=='general' ? ''
+                                                                                            {{strtolower(trim($record->section->name))=='general' || strtolower(trim($record->section->name))=='combined' ? ''
                                                                                               : $record->section->name}}
                         </div>
                         <div class="col-sm-12 mb-3 text-uppercase" id="student-gender">Gender: {{$record->student->gender}}</div>

@@ -67,7 +67,7 @@
                                                 <td>@{{cbt.name}}</td>
                                                 <td>@{{cbt.duration}}</td>
                                                 <td>@{{cbt.subject.name}}</td>
-                                                <td>@{{getCbtType(cbt.type)}} </td>
+                                                <td>@{{getCbtType(parseInt(cbt.type))}} </td>
                                                 <td class="">
                                                         <button @click="takeTest(cbt)" class="btn btn-success"><i class="fa fa-chalkboard-teacher"></i> Take Test</button>
                                                         

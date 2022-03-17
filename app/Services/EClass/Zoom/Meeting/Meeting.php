@@ -16,6 +16,7 @@ class Meeting{
     }
 
     public function get($meeting_id){
+        $meeting_id = (int)$meeting_id;
         $token = $this->getJWT();
         $response = Http::withToken($token)
                             ->acceptJson()
@@ -24,7 +25,7 @@ class Meeting{
             return $response->collect();
         }
         
-        return new RequestException($response);
+        return $response->throw();
     }
 
     public function create($data=[]){
@@ -42,7 +43,7 @@ class Meeting{
             return $response->collect();
         }
         
-        return new RequestException($response);
+        return $response->throw();
     }
 
     public function update($meeting_id, $data=[]){
@@ -54,7 +55,7 @@ class Meeting{
             return $response->collect();
         }
         
-        return new RequestException($response);
+        return $response->throw();
     }
 
     public function list($next_page_token=''){
@@ -66,7 +67,7 @@ class Meeting{
             return $response->collect();
         }
         
-        return new RequestException($response);
+        return $response->throw();
     }
 
     public function delete($meeting_id){
@@ -81,7 +82,7 @@ class Meeting{
             return $response->collect();
         }
         
-        return new RequestException($response);
+        return $response->throw();
     }
 
 

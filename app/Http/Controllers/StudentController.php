@@ -141,7 +141,7 @@ class StudentController extends Controller
         $student->phone1 = $request->input('phone1')==null?'Nil':$request->input('phone1');
         $student->phone2 = $request->input('phone2')==null?'Nil':$request->input('phone2');
         $student->state_id = $request->input('state_id')==null?$request->input('old_state_id'):$request->input('state_id');
-        $student->lga_id = $request->input('state_id')==null?$request->input('old_lga_id'):$request->input('lga_id');
+        $student->lga_id = $request->input('lga_id')==null?$request->input('old_lga_id'):$request->input('lga_id');
         $student->address = $request->input('address')==null?'Nil':$request->input('address');
         $saved = DB::transaction(function() use($student){
             $student->user->save();

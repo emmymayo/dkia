@@ -23,7 +23,8 @@ class UserDashboardController extends Controller
         elseif(User::find(Auth::id())->isStudent()){
             $student_id = User::find(auth()->id())->student->id;
             
-            $section = Exam::getStudentCurrentSection($student_id);
+            $section = Exam::getStudentCurrentSection($student_id) ;
+            
             
             return view('dashboards.main', ['my_section'=> $section]);
         }

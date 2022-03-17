@@ -34,13 +34,8 @@ if(document.getElementById('student-attendance')){
 document.addEventListener('DOMContentLoaded', function(){
     //get student attendance
     var student_id = document.getElementById('student_id').value ;
-    var events = null;
     var url = `/attendances/student/${student_id}/events`;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function(){
-        if(this.readyState==4 && this.status == 200){
-            events = JSON.parse(this.responseText);
-            //initialize attendance
+    //initialize attendance
             var calendarEl = document.getElementById('student-attendance');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 themeSystem: 'bootstrap',
@@ -50,16 +45,13 @@ document.addEventListener('DOMContentLoaded', function(){
                     center:'title',
                     right:'dayGridMonth,dayGridWeek'
                 },
-                events: events.data
+                eventSources:[
+                    {url:`/attendances/student/${student_id}/events`}
+                ]
+                // events: myEvents
             });
+            
             calendar.render();
-        }
-        else{
-            console.log(this.response);
-        }
-    };
-    xhttp.open("GET",url,true);
-    xhttp.send();
     
 });
 }

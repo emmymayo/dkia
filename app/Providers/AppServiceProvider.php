@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Resources\StudentResource;
 use Illuminate\Support\ServiceProvider;
 use App\Services\MultiDatabaseHandler;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        StudentResource::withoutWrapping();
         Relation::morphMap([
             'sections' => 'App\Models\Section',
             'exams' => 'App\Models\Exam'

@@ -15,7 +15,7 @@ class SessionSeeder extends Seeder
     public function run()
     {
         //From 2019 to 2039
-        for($i=2019;$i<=2039;$i++){
+        for($i=2020;$i<=2039;$i++){
             $year = $i;
            Session::factory()->create([
                'start' => $year,

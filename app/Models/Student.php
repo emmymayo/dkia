@@ -9,6 +9,7 @@ use App\Models\State;
 use App\Models\Lga;
 use App\Models\User;
 use App\Models\Mark;
+use Illuminate\Database\Eloquent\Builder;
 
 class Student extends Model
 {
@@ -27,6 +28,17 @@ class Student extends Model
         'phone1',
         'phone2',
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('soft-deletes', function (Builder $builder) {
+            $builder->whereNotIn('user_id', function($query){
+                $query->select('id')
+                    ->from('users')
+                    ->where('deleted_at','<>','null');
+            });
+        });
+    }
 
     public function user(){
         return $this->belongsto(User::class);
@@ -52,4 +64,6 @@ class Student extends Model
         $section = Section::whereIn('id',\App\Support\Helpers\Exam::getStudentCurrentSection($this->id));
         return $section;
     }
+
+    
 }

@@ -23,8 +23,9 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Illuminate\Session\Middleware\StartSession::class,
-        \App\Http\Middleware\SetWorkingDB::class,
+        // \App\Http\Middleware\SetWorkingDB::class,
         \App\Http\Middleware\ShareSettingsToView::class,
+        // \App\Http\Middleware\EnsureStudentIsRegisteredInCurrentSession::class,
     ];
 
     /**

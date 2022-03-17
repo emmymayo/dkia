@@ -30,7 +30,7 @@ class PersistCreatedMeeting implements ShouldQueue
     {
         $e_class = new EClass();
         $e_class->zoom_uuid = $event->response['uuid'];
-        $e_class->zoom_meeting_id = $event->response['id'];
+        $e_class->zoom_meeting_id = strval($event->response['id']);
         $e_class->topic = $event->response['topic'];
         $e_class->type = $event->response['type'];
         $e_class->duration = $event->response['duration'];

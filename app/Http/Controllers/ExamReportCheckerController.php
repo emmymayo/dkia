@@ -95,10 +95,10 @@ class ExamReportCheckerController extends Controller
                                 ->where('student_id',$student_id)
                                 ->where('section_id', $record->section_id)
                                  ->first();
-        //get no in section/class 
-        $current_session = SchoolSetting::getSchoolSetting('current.session');
+        //get no in section/class from session in exam model
+        // $current_session = SchoolSetting::getSchoolSetting('current.session');
         $no_in_class = StudentSectionSession::query()
-                            ->where('session_id',$current_session)
+                            ->where('session_id',$exam->session->id)
                             ->where('section_id', $record->section_id)
                             ->count();
        
@@ -113,7 +113,5 @@ class ExamReportCheckerController extends Controller
             ]);
     }
 
-    public function getStudentPosition(){
-       
-    }
+   
 }

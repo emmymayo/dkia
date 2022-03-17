@@ -18,6 +18,6 @@ class SubjectSeeder extends Seeder
     {
         
 
-        Subject::factory()->count(5)->create();
+        Subject::factory()->count(3)->create();
     }
 }

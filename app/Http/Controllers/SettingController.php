@@ -52,7 +52,7 @@ class SettingController extends Controller
     public function uploadSchoolLogo(Request $request){
         $this->authorize('create', Setting::class);
         $request->validate([
-            'photo' => 'bail|required|file|image|max:1024|mimes:jpg,png'
+            'photo' => 'bail|required|file|image|max:200|mimes:jpg,png'
         ]);
         if($request->file('photo')){
             

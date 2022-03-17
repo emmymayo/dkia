@@ -50,7 +50,8 @@ class AttendanceController extends Controller
             'exam_id' => 'required',
             'date' => 'required',
             'morning' => 'required',
-            'afternoon' => 'required'
+            'afternoon' => 'required',
+            'remark' => 'nullable:max:200'
         ]);
 
         $roll = Attendance::firstWhere([

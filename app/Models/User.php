@@ -75,4 +75,8 @@ class User extends Authenticatable
         return Role::find($this->role_id)->name == 'student'? true : false;
     }
 
+    public function payment(){
+        return $this->hasMany(Payment::class);
+    }
+
 }

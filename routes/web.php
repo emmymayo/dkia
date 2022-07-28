@@ -30,6 +30,7 @@ use App\Http\Controllers\ExamBroadsheetController;
 use App\Http\Controllers\GradeSystemController;
 use App\Http\Controllers\MarkController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PinController;
 use App\Http\Controllers\ProfileController;
@@ -328,6 +329,10 @@ Route::get('/student-cbt-results',[StudentCbtResultController::class,'index'])->
 Route::get('/student-cbt-results/calculate',[StudentCbtResultController::class,'calculateResult'])->middleware('auth');
 Route::patch('/student-cbt-results',[StudentCbtResultController::class,'update'])->middleware('auth');
 
+//Payment Route
+Route::get('/payment/create', [PaymentController::class, 'createTransaction'])->middleware('auth');
+Route::post('/payment', [PaymentController::class, 'startTransaction'])->name('save_payment');
+Route::get('/payment/callback/{payment}', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->middleware('auth')->name('initiate-payment');
 //Artisan
 
 Route::get('/commands/artisan/{command}', function($command){

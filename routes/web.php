@@ -332,7 +332,8 @@ Route::patch('/student-cbt-results',[StudentCbtResultController::class,'update']
 //Payment Route
 Route::get('/payment/create', [PaymentController::class, 'createTransaction'])->middleware('auth');
 Route::post('/payment', [PaymentController::class, 'startTransaction'])->name('save_payment');
-Route::get('/payment/callback/{payment}', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->middleware('auth')->name('initiate-payment');
+Route::get('/payment/status', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->middleware('auth')->name('initiate-payment');
+
 //Artisan
 
 Route::get('/commands/artisan/{command}', function($command){

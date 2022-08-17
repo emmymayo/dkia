@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class PaymentController extends Controller
 {
@@ -16,10 +17,7 @@ class PaymentController extends Controller
      */
     public function createTransaction()
     {
-        $paystack = Payment::PAYMENT_PAYSTACK;
-        $flutter = Payment::PAYMENT_FLUTTER;
-
-        return view('payment', compact('flutter', 'paystack'));
+        return view('payment');
     }
 
     /**
@@ -51,6 +49,8 @@ class PaymentController extends Controller
         if (!$payment->save()){
             return back()->with('action-fail','Something went wrong. Try Again');
         }
+        $payment->payment_status = Payment::STATUS_PROCCESSING;
+        $payment->save();
         return view('initiate-payment', $payment);
         
      }
@@ -63,33 +63,24 @@ class PaymentController extends Controller
     public function handleGatewayCallback(Request $request)
     {
         // dd($request);
-        $curl = curl_init();
+        $key = 'sk_test_f64dd278ffd1c433e4e30d5de45213ac5da38b7b';
   
-        curl_setopt_array($curl, [
-            CURLOPT_URL => `https://api.paystack.co/transaction/verify/:$request->ref`,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer SECRET_KEY",
-                "Cache-Control: no-cache",
-            ]
-        ]);
+        $response = Http::retry(3)->withToken($key,'Bearer')
+                       ->get('https://api.paystack.co/transaction/verify/'.$request->ref);
         
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
+        $update = Payment::where('reference', $request->ref)->first();
 
-        dd($curl);
-        curl_close($curl);
-        
-        if ($err) {
-            echo "cURL Error #:" . $err;
+        if(!$response->successful()){
+            $update->payment_status = Payment::STATUS_FAILED;
+            $update->save();
+            echo("Transaction was not verified");
         } else {
-            echo $response;
+            $update->payment_status = Payment::STATUS_SUCCESSFUL;
+            $update->save();
+            return redirect()->route('create-payment');
         }
+        // dd($request);
+        dd($response);
     }
 
     /**
@@ -120,10 +111,13 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function cancelTransaction(Request $request)
+    public function cancelTransaction(Request $request, $id)
     {
+        $payment_delete = Payment::find($id);
+        $payment_delete->delete();
+
         return redirect()
-            ->route('createTransaction')
+            ->route('create-payment')
             ->with('error', $response['message'] ?? 'You have canceled the transaction.');
     }
 }

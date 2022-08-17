@@ -330,9 +330,10 @@ Route::get('/student-cbt-results/calculate',[StudentCbtResultController::class,'
 Route::patch('/student-cbt-results',[StudentCbtResultController::class,'update'])->middleware('auth');
 
 //Payment Route
-Route::get('/payment/create', [PaymentController::class, 'createTransaction'])->middleware('auth');
+Route::get('/payment/create', [PaymentController::class, 'createTransaction'])->middleware('auth')->name('create-payment');
 Route::post('/payment', [PaymentController::class, 'startTransaction'])->name('save_payment');
 Route::get('/payment/status', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->middleware('auth')->name('initiate-payment');
+Route::post('/payment/cancel/{id}', [PaymentController::class, 'cancelTransaction'])->name('cancel-payment');
 
 //Artisan
 

@@ -2,25 +2,28 @@
 <form id="paymentForm">
     <div class="form-group">
 
-        <input value="{{ auth()->user()->email }}" type="text" id="email-address" required readonly />
+        <input value="{{ auth()->user()->email }}" type="hidden" id="email-address" required />
     </div>
     <div class="form-group">
 
-        <input value="{{$amount}}" type="text" id="amount" required readonly />
+        <input value="{{$amount}}" type="hidden" id="amount" required />
     </div>
     <div class="form-group">
 
-        <input value="{{$on_behalf}}" type="text" id="first-name" readonly />
+        <input value="{{$on_behalf}}" type="hidden" id="first-name" />
     </div>
     <div class="form-group">
 
-        <input value="{{$payment_status}}" type="text" id="last-name" readonly />
+        <input value="{{$payment_status}}" type="hidden" id="last-name" />
     </div>
     <div class="form-submit">
-        <button type="button" onclick="payWithPaystack()"> Pay </button>
+        <button class="btn btn-success" type="button" onclick="payWithPaystack()"> Pay </button>
     </div>
 </form>
-
+<form method="POST" action="{{route('cancel-payment', $id)}}">
+    {{ csrf_field() }}
+    <button type="submit">Cancel Payment</button>
+</form>
 
 <script>
     var paymentForm = document.getElementById('paymentForm');
@@ -40,7 +43,7 @@
             // Make an AJAX call to your server with the reference to verify the transaction
             },
             onClose: function() {
-            alert('Transaction was not completed, window closed.');
+                alert('Transaction was not completed, window closed.');
             },
         });
         handler.openIframe();

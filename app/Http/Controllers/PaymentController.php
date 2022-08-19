@@ -17,7 +17,7 @@ class PaymentController extends Controller
      */
     public function createTransaction()
     {
-        return view('payment');
+        return view('pages.payment.create');
     }
 
     /**
@@ -51,7 +51,7 @@ class PaymentController extends Controller
         }
         $payment->payment_status = Payment::STATUS_PROCCESSING;
         $payment->save();
-        return view('initiate-payment', $payment);
+        return view('pages.payment.initiate-payment', $payment);
         
      }
 
@@ -62,25 +62,24 @@ class PaymentController extends Controller
      */
     public function handleGatewayCallback(Request $request)
     {
-        // dd($request);
-        $key = 'sk_test_f64dd278ffd1c433e4e30d5de45213ac5da38b7b';
+        
+        $key = config('payment.paystack.secret_key');
   
         $response = Http::retry(3)->withToken($key,'Bearer')
                        ->get('https://api.paystack.co/transaction/verify/'.$request->ref);
         
-        $update = Payment::where('reference', $request->ref)->first();
+        $payment = Payment::where('reference', $request->ref)->first();
 
         if(!$response->successful()){
-            $update->payment_status = Payment::STATUS_FAILED;
-            $update->save();
+            $payment->payment_status = Payment::STATUS_FAILED;
+            $payment->save();
             echo("Transaction was not verified");
         } else {
-            $update->payment_status = Payment::STATUS_SUCCESSFUL;
-            $update->save();
+            $payment->payment_status = Payment::STATUS_SUCCESSFUL;
+            $payment->save();
             return redirect()->route('create-payment');
         }
-        // dd($request);
-        dd($response);
+
     }
 
     /**
@@ -111,9 +110,9 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function cancelTransaction(Request $request, $id)
+    public function cancelTransaction(Request $request)
     {
-        $payment_delete = Payment::find($id);
+        $payment_delete = Payment::where('reference', $request->ref)->first();
         $payment_delete->delete();
 
         return redirect()

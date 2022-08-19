@@ -78,7 +78,7 @@ return [
     //TEST
     //set number of students to be created in Database Seeder
     'seed' => [
-        'students' => 0
+        'students' => 1
     ]
 
 ];

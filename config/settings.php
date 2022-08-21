@@ -79,6 +79,12 @@ return [
     //set number of students to be created in Database Seeder
     'seed' => [
         'students' => 0
+    ],
+
+    'import' => [
+        'student' => [
+            'default-password' => 'password'
+        ]
     ]
 
 ];

@@ -10,7 +10,10 @@ class State extends Model
 {
     use HasFactory;
 
+    const DEFAULT_STATE = 15; //FCT
+    
     public function lgas(){
         return $this->hasMany(Lga::class);
     }
+
 }

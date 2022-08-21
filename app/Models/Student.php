@@ -64,6 +64,5 @@ class Student extends Model
         $section = Section::whereIn('id',\App\Support\Helpers\Exam::getStudentCurrentSection($this->id));
         return $section;
     }
-
     
 }

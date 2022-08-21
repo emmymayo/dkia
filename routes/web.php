@@ -47,10 +47,12 @@ use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\TimetableRecordController;
 use App\Http\Controllers\TimetableTimeslotController;
 use App\Http\Controllers\TimetableViewController;
+use App\Http\Controllers\StudentSectionCSVImportController;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -144,6 +146,8 @@ Route::get('/sections/classes/{classes_id}',[SectionApiController::class,'classS
 Route::get('/sections/classes/{classes_id}/user',[SectionApiController::class,'mySections'])->middleware('auth');
 Route::get('/sections/get/{section}',[SectionApiController::class,'show'])->middleware('auth');
 Route::get('/sections/user',[SectionApiController::class,'userSection'])->middleware('auth');
+Route::get('/sections/{section}/import-students',[StudentSectionCSVImportController::class,'index'])->middleware('auth');
+Route::post('/sections/{section}/import-students',[StudentSectionCSVImportController::class,'import'])->middleware('auth');
 
 
 //Student Sections  Routes (Promotion)
@@ -354,3 +358,7 @@ Route::get('/commands/artisan/{command}', function($command){
     Artisan::call($command);
     return Artisan::output();
 })->middleware();
+
+//Student Section import
+Route::get('/import', [StudentSectionCSVImportController::class, 'index']);
+Route::post('/import', [StudentSectionCSVImportController::class, 'import']);

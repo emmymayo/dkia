@@ -10,6 +10,8 @@ class Lga extends Model
 {
     use HasFactory;
 
+    const DEFAULT_LGA = 281; //Abuja municipal
+    
     public $with = ['state:id,name'];
 
     public function state(){

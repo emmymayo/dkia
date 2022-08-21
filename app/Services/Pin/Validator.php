@@ -6,7 +6,7 @@ use App\Models\Pin;
 class Validator{
 
 
-    public function validateAndUse($token, $student_id,$exam_id){
+    public function validateAndUse($token, $student_id, $exam_id){
         //try to fetch pin 
         $pin = Pin::where('token',$token)
                     ->where('exam_id',$exam_id)

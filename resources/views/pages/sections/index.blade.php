@@ -114,6 +114,7 @@
                                         <div class="dropdown-menu" role="menu" >
                                         
                                         <a href="/sections/{{$section->id}}/edit" class="dropdown-item"><i class="fas fa-edit"></i> Edit</a>
+                                        <a href="/sections/{{$section->id}}/import-students" class="dropdown-item"><i class="fas fa-upload"></i> Import Students</a>
                                         <div class="dropdown-divider"></div>
                                         <form action="/sections/{{$section->id}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
                                                 @csrf 

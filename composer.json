@@ -13,7 +13,8 @@
         "intervention/image": "^2.5",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.4"
+        "livewire/livewire": "^2.4",
+        "unicodeveloper/laravel-paystack": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

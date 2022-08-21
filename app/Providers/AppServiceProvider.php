@@ -8,6 +8,7 @@ use App\Services\MultiDatabaseHandler;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Models\Setting;
 use App\Support\Helpers\SchoolSetting;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,5 +34,7 @@ class AppServiceProvider extends ServiceProvider
             'sections' => 'App\Models\Section',
             'exams' => 'App\Models\Exam'
         ]);
+
+        Paginator::useBootstrap();
     }
 }

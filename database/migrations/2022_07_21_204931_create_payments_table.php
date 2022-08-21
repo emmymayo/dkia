@@ -21,11 +21,11 @@ class CreatePaymentsTable extends Migration
             $table->string('purpose');
             $table->decimal('amount', $precision = 10, $scale = 2);
             $table->string('reference');
-            $table->timestamps('payment_date');
-            $table->tinyInteger('payment_service');
+            $table->date('payment_date');
+            $table->tinyInteger('payment_service')->nullable();
             $table->enum('payment_status', [Payment::STATUS_PENDING, Payment::STATUS_PROCCESSING, Payment::STATUS_SUCCESSFUL, Payment::STATUS_FAILED]);
-            $table->string('transaction_id');
-            $table->string('remark');
+            $table->string('transaction_id')->nullable();
+            $table->string('remark')->nullable();
             $table->timestamps();
         });
     }

@@ -25,11 +25,13 @@ use App\Http\Controllers\CbtController;
 use App\Http\Controllers\CbtQuestionController;
 use App\Http\Controllers\CbtResultController;
 use App\Http\Controllers\CbtSectionController;
+use App\Http\Controllers\CheckTransactionController;
 use App\Http\Controllers\EClassController;
 use App\Http\Controllers\ExamBroadsheetController;
 use App\Http\Controllers\GradeSystemController;
 use App\Http\Controllers\MarkController;
 use App\Http\Controllers\NoticeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\PinController;
 use App\Http\Controllers\ProfileController;
@@ -331,6 +333,17 @@ Route::get('/student-cbts',[StudentCbtController::class, 'index'])->middleware('
 Route::get('/student-cbt-results',[StudentCbtResultController::class,'index'])->middleware('auth');
 Route::get('/student-cbt-results/calculate',[StudentCbtResultController::class,'calculateResult'])->middleware('auth');
 Route::patch('/student-cbt-results',[StudentCbtResultController::class,'update'])->middleware('auth');
+
+//Payment Route
+Route::get('/payment/create', [PaymentController::class, 'createTransaction'])->middleware('auth')->name('create-payment');
+Route::post('/payment', [PaymentController::class, 'startTransaction'])->name('save_payment');
+Route::get('/payment/status', [App\Http\Controllers\PaymentController::class, 'handleGatewayCallback'])->middleware('auth')->name('initiate-payment');
+Route::get('/payment/cancel', [PaymentController::class, 'cancelTransaction'])->middleware('auth')->name('cancel-payment');
+
+//Check payment
+Route::get('/payments-history', [CheckTransactionController::class, 'myPayment'])->middleware('auth');
+Route::post('/payment-invoice/{id}', [CheckTransactionController::class, 'show_receipt'])->middleware('auth')->name('get-receipt');
+Route::get('/check-payments', [CheckTransactionController::class, 'check_payment'])->middleware('auth')->name('check-payment');
 
 //Artisan
 
